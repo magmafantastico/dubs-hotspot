@@ -6,16 +6,47 @@
 	<meta name="viewport"
 	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
 	<script src="../dist/js/villa.min.js"></script>
-	<link rel="stylesheet" href="../dist/css/villa.min.css"/>
+	<link rel="stylesheet" href="dist/css/villa.min.css"/>
 	<!--[if lt IE 10]>
-	<link rel="stylesheet" type="text/css" href="../dist/css/material-colors.css"/>
-	<link rel="stylesheet" type="text/css" href="../dist/css/cross.css"/>
-	<script src="../dist/js/html5shiv.js"></script>
-	<script src="../dist/js/html5shiv-printshiv.js"></script>
-	<script src="../dist/js/classList.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="dist/css/material-colors.css"/>
+	<link rel="stylesheet" type="text/css" href="dist/css/cross.css"/>
+	<script src="dist/js/html5shiv.js"></script>
+	<script src="dist/js/html5shiv-printshiv.js"></script>
+	<script src="dist/js/classList.min.js"></script>
 	<![endif]-->
 </head>
 <body class="grey-900 font-grey-700">
+
+$(if chap-id)
+<form name="sendin" action="$(link-login-only)" method="post">
+	<input type="hidden" name="username" />
+	<input type="hidden" name="password" />
+	<input type="hidden" name="dst" value="http://kabanas.info/imprint" />
+	<input type="hidden" name="popup" value="true" />
+</form>
+
+<script type="text/javascript" src="md5.js"></script>
+<script type="text/javascript">
+<!--
+    function doLogin() {
+		document.sendin.username.value = document.login.username.value;
+		document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+		document.sendin.submit();
+		return false;
+    }
+//-->
+</script>
+$(endif)
+
+<form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+	<input type="hidden" name="dst" value="$(link-orig)" />
+	<input type="hidden" name="popup" value="true" />
+	<input name="username" type="hidden" value="admin"/>
+	<input name="password" type="hidden"/>
+</form>
+
+
+<!-- PROMO START -->
 
 <style>
 
@@ -81,16 +112,20 @@
 	<a id="login" class="btn
 	amber-900
 	border-amber-900
+	h-amber-800
+	hborder-amber-800
+	f-amber-800
+	fborder-amber-800
 	font-white">
 		<span class="txt">Obter Acesso!</span>
 	</a>
 
 </div>
 
+<!-- PROMO END -->
+
 <script>
-
-	/*window.location = 'http://google.com.br';*/
-
+	document.getElementById('login').addEventListener('click', doLogin);
 </script>
 
 </body>

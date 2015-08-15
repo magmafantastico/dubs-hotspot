@@ -54,7 +54,7 @@ gulp.task('serve', function() {
 	//server.start();
 
 	//use gulp.watch to trigger server actions(notify, start or stop)
-	gulp.watch(['index.html', 'clean/*.html'], function () {
+	gulp.watch(['index.html', 'clean/*.html', 'clean-ice/*.html', 'dark-solid/*.html', 'dark/*.html'], function () {
 		server.notify.apply(server, arguments);
 	});
 });
